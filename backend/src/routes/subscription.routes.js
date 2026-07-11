@@ -1,0 +1,11 @@
+import { Router } from "express";
+import { toggleSubscription, getChannelSubscribers, getSubscribedChannels } from "../controllers/subscription.controller.js";
+import { verifyJWT } from "../middlewares/auth.middleware.js";
+
+const router = Router();
+router.use(verifyJWT);
+
+router.route("/c/:channelId").post(toggleSubscription).get(getChannelSubscribers);
+router.route("/u/:userId").get(getSubscribedChannels);
+
+export default router;
